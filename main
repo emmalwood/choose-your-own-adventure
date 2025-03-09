@@ -1,0 +1,201 @@
+import java.util.Scanner;
+
+public class JurassicAdventure {
+    
+    // Scanner to read input from the user
+    static Scanner scanner = new Scanner(System.in);
+    
+    public static void main(String[] args) {
+        // Start the adventure
+        startGame();
+    }
+
+    // Function to start the game
+    public static void startGame() {
+        System.out.println("Welcome to Jurassic Park: The Dinosaur Horror Adventure!");
+        System.out.println("You find yourself on an island full of dangerous dinosaurs. Your goal is to survive and escape.");
+
+        // First choice of the game
+        firstDecision();
+    }
+
+    // First decision - Entering the park or running away
+    public static void firstDecision() {
+        System.out.println("\nYou're standing at the entrance of Jurassic Park.");
+        System.out.println("Do you: ");
+        System.out.println("1. Enter the park and explore.");
+        System.out.println("2. Turn back and run to the helicopter.");
+
+        int choice = getPlayerChoice();
+
+        if (choice == 1) {
+            explorePark();
+        } else if (choice == 2) {
+            runToHelicopter();
+        } else {
+            System.out.println("Invalid choice. Try again.");
+            firstDecision();
+        }
+    }
+
+    // Function to handle exploring the park
+    public static void explorePark() {
+        System.out.println("\nYou cautiously enter the park, looking around for any signs of danger.");
+        System.out.println("Suddenly, you hear a loud roar in the distance!");
+        System.out.println("Do you: ");
+        System.out.println("1. Investigate the roar.");
+        System.out.println("2. Hide in a nearby building.");
+
+        int choice = getPlayerChoice();
+
+        if (choice == 1) {
+            investigateRoar();
+        } else if (choice == 2) {
+            hideInBuilding();
+        } else {
+            System.out.println("Invalid choice. Try again.");
+            explorePark();
+        }
+    }
+
+    // Function for investigating the roar
+    public static void investigateRoar() {
+        System.out.println("\nYou follow the sound of the roar and come across a massive Tyrannosaurus Rex!");
+        System.out.println("Do you: ");
+        System.out.println("1. Try to fight the T-Rex.");
+        System.out.println("2. Run away!");
+
+        int choice = getPlayerChoice();
+
+        if (choice == 1) {
+            System.out.println("\nThe T-Rex is too powerful! You are eaten!");
+            gameOver();
+        } else if (choice == 2) {
+            System.out.println("\nYou manage to escape the T-Rex's grasp and make it to a safe area.");
+            continueAdventure();
+        } else {
+            System.out.println("Invalid choice. Try again.");
+            investigateRoar();
+        }
+    }
+
+    // Function for hiding in the building
+    public static void hideInBuilding() {
+        System.out.println("\nYou hide inside a nearby building, trying to catch your breath.");
+        System.out.println("But suddenly, a pack of Velociraptors bursts through the door!");
+        System.out.println("Do you: ");
+        System.out.println("1. Fight the raptors with whatever you can find.");
+        System.out.println("2. Run out the back door and escape.");
+
+        int choice = getPlayerChoice();
+
+        if (choice == 1) {
+            System.out.println("\nYou try to fight the raptors, but they overwhelm you!");
+            gameOver();
+        } else if (choice == 2) {
+            System.out.println("\nYou narrowly escape through the back door and continue your journey.");
+            continueAdventure();
+        } else {
+            System.out.println("Invalid choice. Try again.");
+            hideInBuilding();
+        }
+    }
+
+    // Function for running to the helicopter (initial choice)
+    public static void runToHelicopter() {
+        System.out.println("\nYou make a dash for the helicopter, but as you approach, the engines start up and take off!");
+        System.out.println("It seems you're stuck on the island with no way to escape.");
+        System.out.println("Do you: ");
+        System.out.println("1. Search for another way off the island.");
+        System.out.println("2. Try to survive and wait for rescue.");
+
+        int choice = getPlayerChoice();
+
+        if (choice == 1) {
+            searchForEscape();
+        } else if (choice == 2) {
+            System.out.println("\nDays go by, and you eventually succumb to the harsh conditions of the island.");
+            gameOver();
+        } else {
+            System.out.println("Invalid choice. Try again.");
+            runToHelicopter();
+        }
+    }
+
+    // Function for searching for an escape after the helicopter leaves
+    public static void searchForEscape() {
+        System.out.println("\nYou find an abandoned boat hidden by the coast!");
+        System.out.println("Do you: ");
+        System.out.println("1. Try to start the boat and escape the island.");
+        System.out.println("2. Wait and hope for a rescue team to arrive.");
+
+        int choice = getPlayerChoice();
+
+        if (choice == 1) {
+            System.out.println("\nYou manage to start the boat and sail off the island. You've escaped!");
+            gameWon();
+        } else if (choice == 2) {
+            System.out.println("\nA week later, you're still waiting. The island is too dangerous, and you're lost.");
+            gameOver();
+        } else {
+            System.out.println("Invalid choice. Try again.");
+            searchForEscape();
+        }
+    }
+
+    // Function for continuing the adventure after escaping danger
+    public static void continueAdventure() {
+        System.out.println("\nYou survive the encounter and find yourself a safe zone.");
+        System.out.println("Do you: ");
+        System.out.println("1. Explore further into the island.");
+        System.out.println("2. Look for a way to signal for help.");
+
+        int choice = getPlayerChoice();
+
+        if (choice == 1) {
+            System.out.println("\nThe adventure continues! But for now, you're safe.");
+            gameWon(); // A temporary win just to wrap up the game.
+        } else if (choice == 2) {
+            System.out.println("\nYou find a flare gun and shoot it into the sky. A rescue team arrives and saves you!");
+            gameWon();
+        } else {
+            System.out.println("Invalid choice. Try again.");
+            continueAdventure();
+        }
+    }
+
+    // Function to handle game over state
+    public static void gameOver() {
+        System.out.println("\nGAME OVER! You didn't survive.");
+        System.out.println("Would you like to play again? (yes/no)");
+        String response = scanner.nextLine().toLowerCase();
+        if (response.equals("yes")) {
+            startGame();
+        } else {
+            System.out.println("Thanks for playing!");
+        }
+    }
+
+    // Function to handle game won state
+    public static void gameWon() {
+        System.out.println("\nCONGRATULATIONS! You've survived Jurassic Park!");
+        System.out.println("Would you like to play again? (yes/no)");
+        String response = scanner.nextLine().toLowerCase();
+        if (response.equals("yes")) {
+            startGame();
+        } else {
+            System.out.println("Thanks for playing!");
+        }
+    }
+
+    // Helper function to get player choice
+    public static int getPlayerChoice() {
+        int choice = -1;
+        while (choice < 1 || choice > 2) {
+            System.out.print("Enter your choice (1 or 2): ");
+            choice = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+        }
+        return choice;
+    }
+}
